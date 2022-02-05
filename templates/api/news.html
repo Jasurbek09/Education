@@ -1,0 +1,38 @@
+{% extends 'api/base.html' %}
+
+
+{% block content %}
+<a href="/api/news/add/">Добавить</a>
+ <table border="1">
+     <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td> Управление</td>
+     </tr>
+   {% for new in news %}
+        <tr>
+            <td>{{new.id}}</td>
+            <td>{{new.title}}</td>
+            <td>
+                <form action="/api/news/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="id" value="{{ new.id }}">
+                    <button>Удалить</button>
+
+                    <a href="/api/news/{{ new.id }}/">Изменить</a>
+
+                </form>
+            </td>
+        </tr>
+
+   {% endfor %}
+
+
+
+ </table>
+
+
+
+
+{% endblock %}

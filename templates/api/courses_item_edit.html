@@ -1,0 +1,56 @@
+{% extends 'api/base.html' %}
+
+
+
+{% block content %}
+    <form action="/api/courses/{{ item.id  }}/" method="POST">
+    {% csrf_token %}
+        <table border="1">
+            <tr>
+                <td>Название</td>
+                <td><input type="text" value="{{item.title}}" name="title"></td>
+            </tr>
+
+            <tr>
+                <td>Статус</td>
+                <td><input type="number" value="{{item.status}}" name="status"></td>
+            </tr>
+            <tr>
+                <td>Lessons count</td>
+                <td><input type="number" value="{{item.lessons_count}}" name="lessons_count"></td>
+            </tr>
+            <tr>
+                <td>Описание</td>
+                <td><input type="text" value="{{item.description}}" name="description"></td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select name="category_id">
+                        <option value="0">Выбрать</option>
+                        {% for cat in categories %}
+                        <option value="{{cat.id}}"{%if item.category_id == cat.id%}selected="selected"{%endif%}>{{cat.title}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>LOGO</td>
+                <td>
+                    <img src="/media/{{item.logo}}" alt="" style="width:300px;">
+                    <input type="hidden" name="logo" value="{{ item.logo }}">
+                    <input type="file" data-name="logo" id="category_logo">
+                </td>
+            </tr>
+            <tr>
+                <tr>
+                    <td><input type="hidden" name="action" value="edit"></td>
+                    <td><button>Сохранить</button></td>
+                </tr>
+            </tr>
+        </table>
+    </form>
+
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'api/base.html' %}
+
+
+{% block content %}
+    <form action="/api/news/add/" method="POST">
+    {% csrf_token %}
+        <table border="1">
+            <tr>
+                <td>Название</td>
+                <td><input type="text" value="" name="title"></td>
+            </tr>
+            <tr>
+                <td>Mini Description</td>
+                <td><input type="text" name="mini_desc"></td>
+            </tr>
+            <tr>
+                <td>Descripiton</td>
+                <td><input type="text" name="desc"></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td><input type="datetime-local" name="date"></td>
+            </tr>
+            <tr>
+                <td>Views Count</td>
+                <td><input type="number" value="0" name="views_count"></td>
+            </tr>
+
+            <tr>
+                <tr>
+                    <td><input type="hidden" name="action" value="add"></td>
+                    <td><button>Сохранить</button></td>
+                </tr>
+            </tr>
+
+        </table>
+
+
+
+    </form>
+
+{% endblock %}
